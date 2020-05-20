@@ -2,10 +2,12 @@
 const parse = require('csv-parse');
 const fs = require('fs');
 let PlayerModel = require('../models/player')
+let TeamModel = require('../models/team')
+
 const csvData = [];
 
 module.exports= function(app, dir){
-app.get('/loadCsv', (req,res)=>{
+app.post('/loadCsv', (req,res)=>{
     fs.createReadStream(dir + '/public/csv/player.csv')
     .pipe(
         parse({
@@ -41,8 +43,21 @@ app.get('/loadCsv', (req,res)=>{
             newPlayer.save();
             count += 1;
         })
-    });
+
+        res.json('done awg')
+    })
+
+})
+
+app.post('/addTeam', function(req, res){
+        var newTeam = new TeamModel({
+            name: req.body.name,
+            money : req.body.money
+        })
+
+        newTeam.save();
+        res.json({done : true, message: 'User is registered'})
+
 
 })
 }
-

@@ -22,9 +22,14 @@ mongoose.connect(config.db ,{ useUnifiedTopology: true, useNewUrlParser: true },
     
 mongoose.Promise = global.Promise;
     
+app.use((req,res,next) =>{
+    console.log(`${new Date().toString()} =>${req.originalUrl}` , req.body)
+    
+    next()
+})
+require('./src/routes/auth')(app,dir)
 
 app.use(Routes)
-require('./src/routes/auth')(app,dir)
 console.log(dir)
 
 // Code to display static error webpage.
