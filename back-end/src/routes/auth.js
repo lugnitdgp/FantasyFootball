@@ -47,11 +47,11 @@ app.post('/loadCsv', (req,res)=>{
                     count += 1;
                 })
         
-                res.json('done awg')
+                res.json({done : true, message: 'Loaded data successfully'})
             })
         }
         else{
-            res.send("awwwwwwwww")
+            res.json({done : false, message : 'Loaded data already'})
         }
     })
     
@@ -77,4 +77,25 @@ app.post('/addTeam', function(req, res){
 
 
 })
+
+app.get('/getList' , (req,res)=>{
+    PlayerModel.find().then( doc =>{
+        res.send(doc)
+    })
+})
+
+app.post('/getPlayer',(req,res)=>{
+PlayerModel.findOne({_id : req.body.id}).then(doc1=>{
+    return res.json(doc1)
+
+})
+
+})
+
+app.get('/getTeams' , (req,res)=>{
+    TeamModel.find().then( doc =>{
+        res.send(doc)
+    })
+})
+
 }
