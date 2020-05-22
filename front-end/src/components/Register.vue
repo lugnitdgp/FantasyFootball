@@ -7,16 +7,14 @@
     <div class="col-sm-8">
       <div class="card">
         <div class="card-body">
-
-
-
+          
             <div class="form-group">
               <label for="email">Team Name</label>
-              <input type="text" class="form-control" v-model="name">
+              <input type="text" class="form-control" v-model="name" required>
             </div>
             <div class="form-group">
               <label for="money">Base Price </label>
-              <input type="" class="form-control" v-model="money">
+              <input type="" class="form-control" v-model="money" require>
             </div>
             <button @click="register">Register</button>
 
