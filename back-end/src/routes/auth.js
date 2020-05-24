@@ -9,14 +9,14 @@ const csvData = [];
 module.exports= function(app, dir){
 app.post('/loadCsv', (req,res)=>{
     PlayerModel.find().then(doc => {
-
+        
         if(doc.length === 0){
             fs.createReadStream(dir + '/public/csv/player.csv')
             .pipe(
                 parse({
                     delimiter : ','
                 })
-
+        
             )
             .on('data', function(dataRow){
                 csvData.push(dataRow);
@@ -46,7 +46,7 @@ app.post('/loadCsv', (req,res)=>{
                     newPlayer.save();
                     count += 1;
                 })
-
+        
                 res.json({done : true, message: 'Loaded data successfully'})
             })
         }
@@ -54,7 +54,7 @@ app.post('/loadCsv', (req,res)=>{
             res.json({done : false, message : 'Loaded data already'})
         }
     })
-
+    
 
 })
 
@@ -67,13 +67,13 @@ app.post('/addTeam', function(req, res){
                 name: req.body.name,
                 money : req.body.money
             })
-
+    
             newTeam.save();
             res.json({done : true, message: `Team ${req.body.name} has been added`})
         }
     })
 
-
+       
 
 
 })
@@ -92,7 +92,7 @@ PlayerModel.findOne({_id : req.body.id}).then(doc1=>{
 
 })
 
-app.get('/getTeams' ,(req,res)=>{
+app.get('/getTeams' , (req,res)=>{
     TeamModel.find().then( doc =>{
         res.send(doc)
     })

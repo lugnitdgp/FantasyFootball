@@ -24,6 +24,11 @@ var PlayerDeet = new Schema({
     type : {
         type: Number,
         required: true
+    },
+    bidDone:{
+        type: Boolean,
+        required: true,
+        default : false
     }
 })
 
