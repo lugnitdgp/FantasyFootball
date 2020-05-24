@@ -92,7 +92,7 @@ PlayerModel.findOne({_id : req.body.id}).then(doc1=>{
 
 })
 
-app.get('/getTeams' , (req,res)=>{
+app.get('/getTeams' ,(req,res)=>{
     TeamModel.find().then( doc =>{
         res.send(doc)
     })
