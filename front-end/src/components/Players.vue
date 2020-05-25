@@ -23,7 +23,7 @@
         <td>{{ player.price}}</td>
         <td>{{ player.rating.toFixed(2)}}</td>
         <td>
-        <router-link to="/" tag="button" class="btn btn-outline-secondary">Bid</router-link>
+        <button @click="bid(player._id)" tag="button" class="btn btn-outline-secondary">Bid</button>
 
         </td>
       </tr>
@@ -43,6 +43,13 @@ name:'Player',
        Player: [],
       type:["","Goalkeeper","Mid-Fielder","Defender","Forward"]
     }
+},
+methods :{
+  bid(a){
+    console.log(a)
+    let routeData = this.$router.resolve({name: 'Player', query: {id: a}});
+    window.open(routeData.href, '_blank')
+  }
 },
 mounted(){
       axios.get('http://localhost:3000/getList')
