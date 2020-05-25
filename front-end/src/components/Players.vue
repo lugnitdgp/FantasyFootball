@@ -16,7 +16,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(player, id) in Players" :key="id">
+      <tr v-for="(player, id) in Player" :key="id">
         <td>{{ player.name}}</td>
         <td>{{ type[player.type]}}</td>
         <td>{{ player.isMarquee}}</td>
@@ -37,10 +37,10 @@
 import axios from 'axios'
 export default {
 
-name:'Players',
+name:'Player',
   data(){
     return{
-       Players: [],
+       Player: [],
       type:["","Goalkeeper","Mid-Fielder","Defender","Forward"]
     }
 },
@@ -55,7 +55,7 @@ mounted(){
       axios.get('http://localhost:3000/getList')
       .then((response) => {
         console.log(response.data);
-        this.Players = response.data;
+        this.Player = response.data;
 
       })
   .catch((error) => {
