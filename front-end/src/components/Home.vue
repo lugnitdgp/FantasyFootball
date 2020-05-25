@@ -8,7 +8,7 @@
                     Fantasy Football
                 </h1>
                 <p class="body-text">
-                    Get the latest information and details on our brand new streaming movies platform!
+                    Let's begin the game, shall we?
                 </p>
 
                 <router-link to="/register" tag="button" class="signup-button">Play</router-link>
