@@ -17,7 +17,8 @@
               <input type="" class="form-control" v-model="money" require>
             </div>
             <button @click="register">Register</button>
-
+            <v-spacer/>
+            <button @click="auction">Start Auction</button>
             {{ error }}
 
 
@@ -52,12 +53,19 @@ export default {
         .then(res => {
           //if successfull
           if (res.status === 200) {
-            this.$router.push('/players');
+            if(res.data.done === false)
+            alert(`ERROR! ${res.data.message}`)
+            else{
+            alert(`Sucesss! ${res.data.message}`)
+            location.reload()}
           }
         }, err => {
           console.log(err.response);
           this.error = err.response.data.error
         })
+    },
+    auction(){
+      this.$router.push('/players')
     }
   }
 }
