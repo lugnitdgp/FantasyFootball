@@ -10,6 +10,11 @@ var Teams = new Schema({
     money:{
         type: Number,
         required: true
+    },
+    players:{
+        type: Array,
+        required : true,
+        default: []
     }
 
 })

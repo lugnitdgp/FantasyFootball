@@ -25,8 +25,8 @@
         <div class="input-group-prepend">
           <label class="input-group-text" for="inputGroupSelect01">Teams</label>
               </div>
-                  <select class="custom-select" id="inputGroupSelect01">
-                    <option  v-for="(team, id) in Teams" :key="id">
+                  <select class="custom-select" id="inputGroupSelect01" v-model="selected">
+                    <option  v-for="(team, id) in Teams" v-bind:value="{id :team._id}" :key="id">
                     {{team.name}}
                 </option>
             </select>
@@ -35,12 +35,12 @@
       <div class="input-group-prepend">
         <span class="input-group-text">$</span>
          </div>
-           <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+           <input type="text" class="form-control" v-model="money">
               <div class="input-group-append">
              <span class="input-group-text">@Sold</span>
              </div>
-         </div>
-   <button type="button" class="btn btn-secondary">SOLD</button>
+    </div>
+   <button type="button" @click="submit(selected.id)" class="btn btn-secondary">SOLD</button>
   </div>
 </div>
 </div>
@@ -66,7 +66,15 @@ data(){
      Player: [],
      type:["","Goalkeeper","Mid-Fielder","Defender","Forward"],
      Teams: [],
+     money: ''
 
+  }
+},
+
+methods:{
+  submit(id){
+    console.log(id)
+    console.log(this.money)
   }
 },
 

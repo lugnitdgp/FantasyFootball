@@ -88,9 +88,20 @@ app.post('/getPlayer',(req,res)=>{
 PlayerModel.findOne({_id : req.body.id}).then(doc1=>{
     return res.json(doc1)
 
-})
 
 })
+})
+
+app.post('/bidDone', (req,res)=>{
+    TeamModel.findOne({_id:req.body.tid}).then(team =>{
+        PlayerModel.findOne({_id : req.body.pid}).then(player=>{
+            team.players
+        
+        
+        })
+    })
+})
+
 
 app.get('/getTeams' , (req,res)=>{
     TeamModel.find().then( doc =>{
