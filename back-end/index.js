@@ -7,7 +7,7 @@ let path = require('path')
 let bodyParser = require('body-parser')
 let cors = require('cors')
 var config = require('./config/database')
-let Routes = require('./src/routes/auth')
+let Routes = require('./src/routes/route')
 
 const dir = __dirname;
 // constants, variables, arrays
@@ -27,7 +27,7 @@ app.use((req,res,next) =>{
     
     next()
 })
-require('./src/routes/auth')(app,dir)
+require('./src/routes/route')(app,dir)
 
 app.use(Routes)
 console.log(dir)
