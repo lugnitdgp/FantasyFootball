@@ -95,15 +95,63 @@ PlayerModel.findOne({_id : req.body.id}).then(doc1=>{
 app.post('/bidDone', (req,res)=>{
     TeamModel.findOne({_id:req.body.tid}).then(team =>{
         PlayerModel.findOne({_id : req.body.pid}).then(player=>{
-            team.players
-        
-        
+            console.log(player)
+            console.log(team)
+            team.players.push(`${player._id}`)
+            if(player.isMarquee === true){
+                team.number.marquee = team.number.marquee +1;
+                if (team.number.marquee > 1){
+                
+                    let rawdata = fs.readFileSync(dir+'/config/config.json');
+                    let save = JSON.parse(rawdata);
+                     console.log(save);
+
+                team.penalty = team.penalty + save.penalty
+                team.rating = team.rating + player.rating
+                }
+
+                else{
+                    team.rating = team.rating + 2*(player.rating)
+                }
+            }
+            else{
+                team.rating = team.rating + player.rating
+
+            }
+
+            team.number.total = team.number.total + 1;
+            if(player.type === 1)
+            team.number.gk = team.number.gk +1;
+            else if(player.type === 2)
+            team.number.mf = team.number.mf +1;
+
+            else if(player.type === 3)
+            team.number.df = team.number.df +1;
+            else if(player.type === 4)
+            team.number.fwd = team.number.fwd +1;
+
+            team.money = team.money - req.body.money
+            player.price = req.body.money
+            player.bidDone = true
+
+            TeamModel.replaceOne({_id:req.body.tid}, team).then(()=>{
+                PlayerModel.replaceOne({_id:req.body.pid}, player).then(()=>{
+                    
+                    res.json({success:true})
+                })
+            })
         })
     })
 })
 
 
 app.get('/getTeams' , (req,res)=>{
+    TeamModel.find().then( doc =>{
+        res.send(doc)
+    })
+})
+
+app.get('/getTeamstats' , (req,res)=>{
     TeamModel.find().then( doc =>{
         res.send(doc)
     })

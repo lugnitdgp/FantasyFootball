@@ -47,8 +47,8 @@ name:'Player',
 methods :{
   bid(a){
     console.log(a)
-    let routeData = this.$router.resolve({name: 'Player', query: {id: a}});
-    window.open(routeData.href, '_blank')
+    this.$router.push({name: 'Player', query: {id: a}});
+    
   }
 },
 mounted(){

@@ -73,8 +73,19 @@ data(){
 
 methods:{
   submit(id){
-    console.log(id)
-    console.log(this.money)
+    const packag ={
+      pid:this.Player._id,
+      tid:id,
+      money:this.money
+    }
+    axios.post('http://localhost:3000/bidDone', packag).then((res)=>{
+        if(res.data.success === true){
+          alert('Player SOLD')
+          this.$router.push('/players')
+        }
+        else
+        alert('unknown error. try again')
+    })
   }
 },
 
@@ -84,7 +95,10 @@ created(){
       .then((response) => {
         console.log(response.data);
         this.Player = response.data;
-
+        if (this.Player.bidDone === true){
+        alert('This player has already been sold')
+        this.$router.push('/players')
+        }
       })
   .catch((error) => {
     console.log(error);

@@ -65,7 +65,10 @@ export default {
         })
     },
     auction(){
-      this.$router.push('/players')
+      axios.post('http://localhost:3000/loadCsv').then(()=>{
+                this.$router.push('/players')
+
+      })
     }
   }
 }
