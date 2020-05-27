@@ -11,7 +11,7 @@
                     Let's begin the game, shall we?
                 </p>
 
-                <router-link to="/register" tag="button" class="signup-button">Play</router-link>
+                <router-link to="/team" tag="button" class="signup-button">Play</router-link>
             </div>
         </div>
         <div class="cube__section">

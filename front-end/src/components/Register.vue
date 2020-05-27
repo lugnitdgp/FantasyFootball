@@ -7,7 +7,7 @@
     <div class="col-sm-8">
       <div class="card">
         <div class="card-body">
-          
+
             <div class="form-group">
               <label for="email">Team Name</label>
               <input type="text" class="form-control" v-model="name" required>
@@ -20,9 +20,6 @@
             <v-spacer/>
             <button @click="auction">Start Auction</button>
             {{ error }}
-
-
-
         </div>
       </div>
     </div>
