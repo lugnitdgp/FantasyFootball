@@ -104,7 +104,7 @@ app.post('/bidDone', (req,res)=>{
                 
                     let rawdata = fs.readFileSync(dir+'/config/config.json');
                     let save = JSON.parse(rawdata);
-                     console.log(save);
+                    
 
                 team.penalty = team.penalty + save.penalty
                 team.rating = team.rating + player.rating
@@ -136,7 +136,7 @@ app.post('/bidDone', (req,res)=>{
 
             TeamModel.replaceOne({_id:req.body.tid}, team).then(()=>{
                 PlayerModel.replaceOne({_id:req.body.pid}, player).then(()=>{
-                    
+
                     res.json({success:true})
                 })
             })
@@ -145,9 +145,28 @@ app.post('/bidDone', (req,res)=>{
 })
 
 
-app.get('/getTeams' , (req,res)=>{
-    TeamModel.find().then( doc =>{
-        res.send(doc)
+app.post('/getTeams' , (req,res)=>{
+    console.log(req.body)
+    let rawdata = fs.readFileSync(dir+'/config/config.json');
+                    let save = JSON.parse(rawdata);
+   
+        PlayerModel.findOne({_id:req.body.id}).then(pl =>{
+            TeamModel.find().then( doc =>{
+            var teams =[]
+            doc.forEach(team =>{
+                if(team.money <= pl.price)
+                    return;
+                else if(team.number.total >= save.total)
+                return;
+                if(pl.type === 1 && team.number.gk >= save.ngk||pl.type === 2 && team.number.mf >= save.nmf||pl.type ===3 && team.number.df >= save.ndf||pl.type === 4 && team.number.fwd >= save.nfw)
+                return;
+                else{
+                    teams.push(team)
+                }
+            })
+
+            return res.json(teams)
+        })
     })
 })
 

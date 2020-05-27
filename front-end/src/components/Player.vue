@@ -95,6 +95,7 @@ created(){
       .then((response) => {
         console.log(response.data);
         this.Player = response.data;
+        this.money = response.data.price
         if (this.Player.bidDone === true){
         alert('This player has already been sold')
         this.$router.push('/players')
@@ -105,7 +106,8 @@ created(){
   });
 },
 mounted(){
-axios.get('http://localhost:3000/getTeams')
+var a ={id: this.$route.query.id}
+axios.post('http://localhost:3000/getTeams', a)
 .then((response) => {
   console.log(response.data);
   this.Teams = response.data;
