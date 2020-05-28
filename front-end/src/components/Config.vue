@@ -26,7 +26,7 @@
                           <label >MARQUEE Penalty</label>
                           <input type="text" class="form-control" v-model="mp">
                       </div>
-                        <button   class="btn btn-primary" >SAVE</button>
+                        <button   @click="send" class="btn btn-primary" >SAVE</button>
                         <button   @click="useDef" class="btn btn-primary float-right">DEFAULT</button>
                         </form>
                    </div>
@@ -49,6 +49,22 @@ export default {
       mp:'',
       fwd:''
     }
+  },
+  mounted(){
+    axios.get('http://localhost:3000/getStatus').then(res =>{
+      var a = res.data;
+      if(a.hasStarted === true){
+        if(a.lastPlayer.length >0){
+          if(a.bidDone === true)
+          this.$router.push('/players')
+          else
+          this.$router.push({name: 'Player', query: {id: a.lastPlayer}});
+        }
+        else{
+          this.$router.push('/register')
+        }
+      }
+    })
   },
   methods: {
      useDef(){

@@ -46,10 +46,33 @@ name:'Player',
 },
 methods :{
   bid(a){
-    console.log(a)
-    this.$router.push({name: 'Player', query: {id: a}});
+    var b ={id : a}
+    axios.post('http://localhost:3000/beginBid', b)
+              this.$router.push({name: 'Player', query: b});
+
     
   }
+},
+created(){
+axios.get('http://localhost:3000/getStatus').then((res) =>{
+      var a = res.data;
+      if(a.hasStarted === true){
+        if(a.lastPlayer.length >0){
+          if(a.bidDone === true)
+          this.$router.push('/players')
+          else{
+            var b = {id : a.lastPlayer}
+           axios.post('http://localhost:3000/getPlayer',b).then(response => {
+                  if(response.data.bidDone === false)
+                  this.$router.push({name: 'Player', query: {id: a.lastPlayer}});
+
+      })}
+        }
+        else{
+          this.$router.push('/players')
+        }
+      }
+    })
 },
 mounted(){
       axios.get('http://localhost:3000/getList')
@@ -57,8 +80,10 @@ mounted(){
         console.log(response.data);
         this.Player = response.data;
 
+
       })
   .catch((error) => {
+    location.reload()
     console.log(error);
   });
 }

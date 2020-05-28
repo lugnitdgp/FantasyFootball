@@ -95,15 +95,14 @@ PlayerModel.findOne({_id : req.body.id}).then(doc1=>{
 app.post('/bidDone', (req,res)=>{
     TeamModel.findOne({_id:req.body.tid}).then(team =>{
         PlayerModel.findOne({_id : req.body.pid}).then(player=>{
-            console.log(player)
-            console.log(team)
+            let rawdata = fs.readFileSync(dir+'/config/config.json');
+            let save = JSON.parse(rawdata);
             team.players.push(`${player._id}`)
             if(player.isMarquee === true){
                 team.number.marquee = team.number.marquee +1;
                 if (team.number.marquee > 1){
                 
-                    let rawdata = fs.readFileSync(dir+'/config/config.json');
-                    let save = JSON.parse(rawdata);
+                    
                     
 
                 team.penalty = team.penalty + save.penalty
@@ -136,7 +135,9 @@ app.post('/bidDone', (req,res)=>{
 
             TeamModel.replaceOne({_id:req.body.tid}, team).then(()=>{
                 PlayerModel.replaceOne({_id:req.body.pid}, player).then(()=>{
-
+                    save.bidDone = true
+                    let data = JSON.stringify(save);
+                    fs.writeFileSync(dir+'/config/config.json', data);
                     res.json({success:true})
                 })
             })
@@ -144,6 +145,68 @@ app.post('/bidDone', (req,res)=>{
     })
 })
 
+app.post('/startGame', (req,res)=>{
+
+    if(req.body.change === true){
+    let config = { 
+        "hasStarted" : true,
+    "lastPlayer" : null,
+    "bidDone" : false,
+    "penalty" : req.body.mp,
+    "ngk" : req.body.gk,
+    "nfw" :req.body.fwd,
+    "ndf" : req.body.df,
+    "nmf": req.body.mf,
+    "total":15
+    };
+     
+    let data = JSON.stringify(config);
+    fs.writeFileSync(dir+'/config/config.json', data);
+    res.send('done');
+
+}
+else{
+    let rawdata = fs.readFileSync(dir+'/config/default.json');
+    let save = JSON.parse(rawdata);
+    save.hasStarted = true
+    save = JSON.stringify(save);
+    fs.writeFileSync(dir+'/config/config.json', save);
+    return res.send('done');
+}
+    
+})
+
+app.get('/getStatus' ,(req,res)=>{
+    let rawdata = fs.readFileSync(dir+'/config/config.json');
+    let save = JSON.parse(rawdata);
+    res.json(save)
+})
+
+app.post('/beginBid',(req,res)=>{
+    let rawdata = fs.readFileSync(dir+'/config/config.json');
+                    let save = JSON.parse(rawdata);
+            save.lastPlayer = req.body.id;
+            save.bidDone = false
+            let data = JSON.stringify(save);
+            fs.writeFileSync(dir+'/config/config.json', data);
+            res.send('done');
+
+})
+
+
+
+
+app.post('/unsold',(req,res)=>{
+    PlayerModel.findOneAndUpdate({_id: req.body.id},{bidDone:true}).then(()=>{
+        let rawdata = fs.readFileSync(dir+'/config/config.json');
+                    let save = JSON.parse(rawdata);
+                    save.bidDone = false
+                    save = JSON.stringify(save)
+                    fs.writeFileSync(dir+'/config/config.json', save);
+                    res.status(200).send('done')
+
+    })
+})
 
 app.post('/getTeams' , (req,res)=>{
     console.log(req.body)

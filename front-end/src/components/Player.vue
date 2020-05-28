@@ -41,7 +41,10 @@
              </div>
     </div>
    <button type="button" @click="submit(selected.id)" class="btn btn-secondary">SOLD</button>
+      <button type="button" @click="unsold()" class="btn btn-secondary">UNSOLD</button>
+
   </div>
+
 </div>
 </div>
 </div>
@@ -86,10 +89,20 @@ methods:{
         else
         alert('unknown error. try again')
     })
+  },
+  unsold(){
+    var a ={
+      id : this.Player._id
+    }
+
+    axios.post('http://localhost:3000/unsold',a).then(()=>{
+      this.$router.push('/players')
+    })
+
   }
 },
 
-created(){
+mounted(){
       var a ={id: this.$route.query.id}
       axios.post('http://localhost:3000/getPlayer',a)
       .then((response) => {
@@ -100,22 +113,19 @@ created(){
         alert('This player has already been sold')
         this.$router.push('/players')
         }
-      })
-  .catch((error) => {
-    console.log(error);
-  });
-},
-mounted(){
-var a ={id: this.$route.query.id}
-axios.post('http://localhost:3000/getTeams', a)
+        else{
+          axios.post('http://localhost:3000/getTeams', a)
 .then((response) => {
   console.log(response.data);
   this.Teams = response.data;
 
 })
-.catch((error) => {
-  console.log(error);
-});
+        }
+      })
+  .catch((error) => {
+    console.log(error)
+    location.reload()
+  });
 }
 
 
