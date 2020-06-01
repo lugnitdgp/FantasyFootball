@@ -11,8 +11,7 @@
         <th>Player Type</th>
         <th>Marquee</th>
         <th>Price</th>
-        <th>Rating</th>
-        <th>Rating</th>
+        <th>Bid</th>
       </tr>
     </thead>
     <tbody>
@@ -21,7 +20,6 @@
         <td>{{ type[player.type]}}</td>
         <td>{{ player.isMarquee}}</td>
         <td>{{ player.price}}</td>
-        <td>{{ player.rating.toFixed(2)}}</td>
         <td>
         <button @click="bid(player._id)" tag="button" class="btn btn-outline-secondary">Bid</button>
 
