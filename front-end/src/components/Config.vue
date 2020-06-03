@@ -1,6 +1,6 @@
 <template>
 
-  <v-app >
+  <v-app id="config">
     <span class="bg"></span>
     <v-content >
 
@@ -207,5 +207,12 @@ export default {
     background-size: cover;
     background-color: blue;
     transform: scale(1.1);
+    
+  }
+  #inspire{
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    padding-right: 20px;
   }
 </style>
