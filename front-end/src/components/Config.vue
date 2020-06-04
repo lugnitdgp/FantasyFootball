@@ -149,6 +149,7 @@ export default {
     }
   },
   mounted(){
+    this.$vuetify.theme.dark = true;
     axios.get('http://localhost:3000/getStatus').then(res =>{
       var a = res.data;
       if(a.hasStarted === true){

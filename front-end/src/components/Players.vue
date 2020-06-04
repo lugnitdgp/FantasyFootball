@@ -1,9 +1,11 @@
 <template >
 
 <div class="container">
-
-  <h1>Player List</h1>
-
+<div v-if="loading">
+<img class="image" src="../../public/favicon.svg" alt="" width="120" height="120">
+</div>
+ <div v-else>
+   <h1>Player List</h1>
   <table class="table table-striped table-borderes">
     <thead>
       <tr>
@@ -27,7 +29,7 @@
       </tr>
     </tbody>
   </table>
-
+ </div>
 </div>
 </template>
 
@@ -39,7 +41,9 @@ name:'Player',
   data(){
     return{
        Player: [],
-      type:["","Goalkeeper","Mid-Fielder","Defender","Forward"]
+       type:["","Goalkeeper","Mid-Fielder","Defender","Forward"],
+       loading: false
+
     }
 },
 methods :{
@@ -48,7 +52,7 @@ methods :{
     axios.post('http://localhost:3000/beginBid', b)
               this.$router.push({name: 'Player', query: b});
 
-    
+
   }
 },
 created(){
@@ -73,21 +77,33 @@ axios.get('http://localhost:3000/getStatus').then((res) =>{
     })
 },
 mounted(){
-      axios.get('http://localhost:3000/getList')
-      .then((response) => {
-        console.log(response.data);
-        this.Player = response.data;
-
-
-      })
-  .catch((error) => {
-    location.reload()
-    console.log(error);
-  });
+     this.loading = true //the loading begin
+     axios.get('http://localhost:3000/getList')
+    .then((response) => {
+      console.log(response.data);
+      this.Player = response.data;})
+      .catch((error) => {
+      location.reload()
+      console.log(error) })
+      .finally(() => (this.loading = false))
 }
 }
 </script>
 
 <style>
 
+.image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120px;
+    height: 120px;
+    margin:-60px 0 0 -60px;
+    webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infi-nite;
+    animation:spin 4s linear infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 </style>
