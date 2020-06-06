@@ -17,12 +17,12 @@ Vue.use(Router)
         component: Home
       },
       {
-        path: '/team',
-        name: 'Team',
+        path: '/config',
+        name: 'Config',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ './components/Team.vue')
+        component: () => import(/* webpackChunkName: "about" */ './components/Config.vue')
       },
 
       {
@@ -48,15 +48,6 @@ Vue.use(Router)
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ './components/Player.vue')
-      },
-      {
-        path: '/teams',
-        name: 'Teams',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ './components/Team.vue')
       }
-
     ]
   })
