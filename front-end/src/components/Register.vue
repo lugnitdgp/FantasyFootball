@@ -1,5 +1,4 @@
 <template>
-
 <v-app id="register">
 <span class="bg"></span>
 <v-container absolute fluid
