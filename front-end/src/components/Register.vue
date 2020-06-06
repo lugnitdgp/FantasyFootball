@@ -1,36 +1,56 @@
 <template>
+<v-app id="register">
+<span class="bg"></span>
+<v-container absolute fluid
+>
+    <v-row
+      align="center"
+      justify="center"
+    >
+      <v-col
+        cols="12"
+        sm="8"
+        md="4"
+      >
+        <v-card class="elevation-12">
+          <v-toolbar
+            color="light-green darken-1"
+            dark
+            flat
+          >
+          <v-spacer></v-spacer>
+            <v-toolbar-title> Team Register </v-toolbar-title>
+            <v-spacer />
 
-<div class="container mt-5">
-  <div v-if="loading">
-    <img class="image" src="../../public/favicon.svg" alt="" width="120" height="120">
-  </div>
-  <div v-else>
-    <div class="row">
-      <div class="col-sm-8">
-        <div class="card">
-          <div class="card-body">
+          </v-toolbar>
+          <v-card-text>
+            <v-form>
+                <v-text-field
+                v-model="name"
+                label="Team Name"
+                name="name"
+                type="text"
+              />
 
-              <div class="form-group">
-                <label for="email">Team Name</label>
-                <input type="text" class="form-control" v-model="name" required>
-              </div>
-              <div class="form-group">
-                <label for="money">Base Price </label>
-              <input type="" class="form-control" v-model="money" require>
-            </div>
-            <button @click="register">Register</button>
-            <v-spacer/>
-            <button @click="auction">Start Auction</button>
-            {{ error }}
-        </div>
-      </div>
-    </div>
-  </div>
- </div>
-</div>
+              <v-text-field
+                v-model="money"
+                label="Base Price"
+                name="money"
+                type="text"
+              />
+            </v-form>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer />
+            <v-btn @click ="register" color="primary">Register</v-btn>
+            <v-btn @click="auction" color="red darken-4">START</v-btn>
 
-
-
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+  </v-app>
 </template>
 <script>
 import axios from 'axios';
@@ -49,22 +69,21 @@ export default {
    this.$vuetify.theme.dark=true
    this.sleep(500).then(()=>{
         this.$vuetify.theme.dark=false
-        
+
 
    }).finally(()=>{
      this.loading = false
    })
 
-     
-   
+
+
 
 
  },
   methods: {
-     sleep(ms) {
+  sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
-}
-    ,
+},
     register() {
       const team = {
         name: this.name,
@@ -72,7 +91,6 @@ export default {
       }
       axios.post('http://localhost:3000/addTeam', team)
         .then(res => {
-          //if successfull
           if (res.status === 200) {
             if(res.data.done === false)
             alert(`ERROR! ${res.data.message}`)
@@ -87,7 +105,7 @@ export default {
     },
     auction(){
       axios.post('http://localhost:3000/loadCsv').then(()=>{
-                this.$router.push('/players')
+      this.$router.push('/players')
 
       })
     }
@@ -96,7 +114,27 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
+
+.bg {
+    width: 100%;
+    height: 90%;
+    position: absolute;
+    top:0;
+    left: 0;
+    opacity: .4;
+    background: url('../../img/bg1.png' ) no-repeat  ;
+    background-size: cover;
+    background-color: blue;
+    transform: scale(1.1);
+
+  }
+  #inspire{
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    padding-right: 20px;
+  }
 
 .image {
     position: absolute;
@@ -113,6 +151,3 @@ export default {
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 </style>
-
-
-
