@@ -10,22 +10,22 @@
             >
     <v-app-bar
       color = "red "
-
-
-
+      
+  
+      
     >
-
-
+    
+      
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
         <v-spacer/>
       <center><v-toolbar-title><strong> Fantasy Football 2020</strong></v-toolbar-title></center>
       <v-spacer/>
     </v-app-bar>
 
-
+    
             </v-card>
 
-
+    
       <v-navigation-drawer
       v-model="drawer"
       absolute
@@ -40,22 +40,22 @@
         >
           <router-link tag="span" to='/'>
           <v-list-item>
-
+            
             <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
             </v-list-item-icon>
             <v-list-item-title>Home</v-list-item-title>
-
+            
           </v-list-item>
           </router-link>
-
+          
 
         </v-list-item-group>
       </v-list>
       </v-navigation-drawer>
-      <v-container absolute fluid
+      <v-container absolute fluid 
       >
-
+                            
 
         <v-row
           align="center"
@@ -75,7 +75,7 @@
               <v-spacer></v-spacer>
                 <v-toolbar-title> Game Configurations </v-toolbar-title>
                 <v-spacer />
-
+                  
               </v-toolbar>
               <v-card-text>
                 <v-form>
@@ -85,7 +85,7 @@
                     name="gk"
                     type="text"
                   />
-
+                  
                   <v-text-field
                     v-model="mf"
                     label="Number of mid-fielders"
@@ -115,19 +115,19 @@
                 <v-spacer />
                 <v-btn @click ="send" color="primary"> Send </v-btn>
                 <v-btn @click="useDef" color="red darken-4">USE Default</v-btn>
-
+                
               </v-card-actions>
             </v-card>
           </v-col>
         </v-row>
 
-      </v-container>
+      </v-container>           
     </v-content>
-
+    
      <Footer/>
 
   </v-app>
-
+ 
 </template>
 
 <script>
@@ -178,11 +178,11 @@ export default {
 
         var a ={
           change: true,
-          mf:this.mf,
-          df: this.df,
-          gk:this.gk,
-          mp:this.mp,
-          fwd:this.fwd
+           mf:this.mf,
+      df: this.df,
+      gk:this.gk,
+      mp:this.mp,
+      fwd:this.fwd
         }
 
         axios.post('http://localhost:3000/startGame', a).then(()=>{
@@ -195,7 +195,7 @@ export default {
 </script>
 
 
-<style scoped>
+<style >
 
 .bg {
     width: 100%;
@@ -208,7 +208,7 @@ export default {
     background-size: cover;
     background-color: blue;
     transform: scale(1.1);
-
+    
   }
   #inspire{
     height: 100%;

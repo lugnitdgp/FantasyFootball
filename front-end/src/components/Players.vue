@@ -90,7 +90,7 @@ mounted(){
 }
 </script>
 
-<style scoped>
+<style>
 
 .image {
     position: absolute;
