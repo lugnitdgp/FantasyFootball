@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "startup": "nodemon src/index.js"
-
   },
   "author": "V Rohan Rao",
   "license": "ISC",

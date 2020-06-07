@@ -1,6 +1,5 @@
 <template >
 <div>
-<span class="bg"></span>
 <div class="page">
  <v-card
    class="mx-auto overflow-hidden">
@@ -79,7 +78,7 @@
       <v-list-item three-line>
       <v-list-item-content>
         <div class="subtitle-2">PRICE</div>
-        <v-list-item-title class="display-2">{{Player.price}}</v-list-item-title>
+        <v-list-item-title class="display-2">{{money}}</v-list-item-title>
       </v-list-item-content>
 
       <v-list-item-avatar
@@ -94,13 +93,10 @@
 </v-card>
   </v-col>
 </v-row>
-
-        </v-container>
-            <v-container absolute fluid
-      >
+</v-container>
+            <v-container   >
     <v-row
           align="center"
-          justify="center"
         >
           <v-col
           >
@@ -127,6 +123,9 @@
                 <v-select
                   :items="Teams"
                   label="Team"
+                  v-model="select"
+                  item-text="name"
+                  item-value="_id"
 
                 >
 
@@ -136,8 +135,8 @@
 
               <v-card-actions>
                 <v-spacer />
-                <v-btn @click="submit(selected.id)" color="primary"> SOLD </v-btn>
-                <v-btn type="button" @click="unsold()"  color="red darken-4">UNSOLD</v-btn>
+                <v-btn @click="submit()" color="primary"> SOLD </v-btn>
+                <v-btn light @click="unsold()"  color="red">UNSOLD</v-btn>
 
               </v-card-actions>
             </v-card>
@@ -183,12 +182,15 @@
 </template>
 
 <script>
+// eslint-disable-next-line
+/* eslint-disable */
 import axios from 'axios'
 export default {
 
 name:'Player',
 data(){
   return{
+     select:null,
      Player: [],
      type:["","Goalkeeper","Mid-Fielder","Defender","Forward"],
      Teams: [],
@@ -198,10 +200,11 @@ data(){
 },
 
 methods:{
-  submit(id){
+  submit(){
+    
     const packag ={
       pid:this.Player._id,
-      tid:id,
+      tid:this.select,
       money:this.money
     }
     axios.post('http://localhost:3000/bidDone', packag).then((res)=>{
@@ -226,6 +229,7 @@ methods:{
 },
 
 mounted(){
+    this.$vuetify.theme.dark =false
       var a ={id: this.$route.query.id}
       axios.post('http://localhost:3000/getPlayer',a)
       .then((response) => {
@@ -354,7 +358,7 @@ padding: 0;
   .main .box1
   {
     width: 50%;
-    height: 100vh;
+    height: 100%;
 
   background-color:teal;  background-image: url('../assets/avatar.jpg');
   background-size: cover;
@@ -364,7 +368,7 @@ padding: 0;
 .box2
   {
     width: 50%;
-    height: 100vh;
+    height: 100%;
 
   }
 @media only screen and (max-width: 600px) {
@@ -379,20 +383,9 @@ padding: 0;
   .box2
   {
       width: 100%;
+      height: 70vh;
   }
 }
 
-.bg {
-    width: 100%;
-    height: 100vh;
-    position: absolute;
-    top:0;
-    left: 0;
-    opacity: .4;
-    background: url('../../img/bg1.png' ) no-repeat  ;
-    background-size: cover;
-    background-color: blue;
-    transform: scale(1.1);
-}
 
 </style>
