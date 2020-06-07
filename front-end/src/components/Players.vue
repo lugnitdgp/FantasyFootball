@@ -1,45 +1,156 @@
 <template >
 
-<div class="container">
 <div v-if="loading">
 <img class="image" src="../../public/favicon.svg" alt="" width="120" height="120">
 </div>
  <div v-else>
-   <h1>Player List</h1>
-  <table class="table table-striped table-borderes">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Player Type</th>
-        <th>Marquee</th>
-        <th>Price</th>
-        <th>Bid</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(player, id) in Player" :key="id">
-        <td>{{ player.name}}</td>
-        <td>{{ type[player.type]}}</td>
-        <td>{{ player.isMarquee}}</td>
-        <td>{{ player.price}}</td>
-        <td>
-        <button @click="bid(player._id)" tag="button" class="btn btn-outline-secondary">Bid</button>
+     <v-app id="config">
+            <v-content>
+<v-card
+        class="mx-auto overflow-hidden"
+            >
+    <v-app-bar
+      color = "red "
+      
+  
+      
+    >
+    
+      
+      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+        <v-spacer/>
+      <center><v-toolbar-title><strong> Fantasy Football 2020</strong></v-toolbar-title></center>
+      <v-spacer/>
+    </v-app-bar>
 
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    
+            </v-card>
+
+    
+      <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      temporary
+    >
+      <v-list
+        nav
+        dense
+      >
+        <v-list-item-group
+          active-class="deep-purple--text text--lighten-2"
+        >
+          <router-link tag="span" to='/'>
+          <v-list-item>
+            
+            <v-list-item-icon>
+              <v-icon>mdi-home</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Home</v-list-item-title>
+            
+          </v-list-item>
+          </router-link>
+          
+
+        </v-list-item-group>
+      </v-list>
+      </v-navigation-drawer>
+     <v-container absolute fluid 
+      >
+                            
+
+        <v-row
+          align="center"
+          justify="center"
+        >
+          <v-col
+            cols="12"
+            md="9"
+          >
+            <v-card class="elevation-12">
+              <v-toolbar
+                color="light-blue darken-4"
+                
+                flat
+              >
+              <v-spacer></v-spacer>
+                <v-toolbar-title> Player List </v-toolbar-title>
+                <v-spacer />
+                  
+              </v-toolbar>
+              <v-text-field
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
+  <v-data-table
+    :headers="headers"
+    :items="Player"
+    :items-per-page="742"
+          :search="search"
+
+    hide-default-footer
+    class="elevation-1"
+  >
+  <template v-slot:item="row">
+          <tr>
+            <td>{{row.item.name}}</td>
+            <td>{{type[row.item.type]}}</td>
+            <td>{{row.item.isMarquee}}</td>
+            <td>{{row.item.price}}</td>
+            <td>
+                <v-btn class="mx-2" light small  @click="bid(row.item._id)">
+                  Bid
+                </v-btn>
+            </td>
+          </tr>
+      </template>
+  
+  </v-data-table>
+  </v-card>
+    </v-col>
+    </v-row>
+
+      </v-container>   
+
+    </v-content >
+               <Footer/>
+
+     </v-app>
+
  </div>
-</div>
+ 
 </template>
 
 <script>
 import axios from 'axios'
+import Footer from './layout/Footer';
+
 export default {
 
-name:'Player',
+name:'Player',components: {
+    Footer
+  },
   data(){
     return{
+      search:'',
+            drawer: false,
+
+      headers:[
+        {
+            text: 'Name',
+            align: 'start',
+            sortable: false,
+            value: 'name',
+          },
+          { text: 'Player Type', value: 'type' },
+          { text: 'Marquee', value: 'isMarquee' },
+          { text: 'Price', value: 'price' },
+          { text: 'Bid', value:'_id'},
+
+          
+      ],
        Player: [],
        type:["","Goalkeeper","Mid-Fielder","Defender","Forward"],
        loading: false
@@ -85,7 +196,8 @@ mounted(){
       .catch((error) => {
       location.reload()
       console.log(error) })
-      .finally(() => (this.loading = false))
+      .finally(() => (this.loading = false,
+            this.$vuetify.theme.dark=true))
 }
 }
 </script>
