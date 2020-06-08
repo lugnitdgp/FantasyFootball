@@ -66,24 +66,15 @@
             <v-card class="elevation-12">
               <v-toolbar
                 color="light-blue darken-4"
-<<<<<<< HEAD
                 
                 
-=======
-
-                flat
->>>>>>> f8d5d744bb37173cd064cf3c42f1c19a23388687
               >
               <v-spacer></v-spacer>
                 <v-toolbar-title class="display-1"> Player List </v-toolbar-title>
                 <v-spacer />
 
               </v-toolbar>
-<<<<<<< HEAD
             <v-container><v-text-field
-=======
-     <v-text-field
->>>>>>> f8d5d744bb37173cd064cf3c42f1c19a23388687
         v-model="search"
         append-icon="mdi-magnify"
         label="Search"
