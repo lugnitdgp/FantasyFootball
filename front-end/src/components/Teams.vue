@@ -1,4 +1,8 @@
 <template>
+<div v-if="loading">
+<img class="image" src="../../public/favicon.svg" alt="" width="120" height="120">
+</div>
+ <div v-else>
   <v-app id="teams">
 
     <span class="bg"></span>
@@ -108,12 +112,13 @@
 
           </v-col>
         </v-row>
-</template>
+    </template>
     </v-data-iterator>
   </v-container>
   </v-content>
 <Footer/>
 </v-app>
+ </div>
 </template>
 
 <script>
@@ -121,24 +126,33 @@ import axios from 'axios'
 import Footer from './layout/Footer';
 export default {
 
-name:'Teams',
+name:'Teams',components: {
+    Footer
+  },
+  methods:{
+    sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+},
+  },
 data(){
   return{
       drawer: false,
       type:["","Goalkeeper","Mid-Fielder","Defender","Forward"],
       Teams: [],
-      money: ''
+      money: '',
+      loading : false
 
   }
 },
 mounted(){
-
+    this.loading = true
+    this.$vuetify.theme.dark=true,
      axios.get('http://localhost:3000/getTeamstats')
      .then((response) => {
-      console.log(response.data);
+       
       this.Teams = response.data;})
       .catch((error) => {
-      console.log(error) })
+      console.log(error) }).finally(()=>(this.sleep(500).then(()=>{this.loading = false})))
 
 }
 }
@@ -165,5 +179,18 @@ mounted(){
     overflow: auto;
     padding-right: 20px;
   }
-
+.image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120px;
+    height: 120px;
+    margin:-60px 0 0 -60px;
+    webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infi-nite;
+    animation:spin 4s linear infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 </style>
