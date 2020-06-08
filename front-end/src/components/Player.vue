@@ -242,9 +242,9 @@ mounted(){
         }
         else{
           axios.post('http://localhost:3000/getTeams', a)
-.then((response) => {
-  console.log(response.data);
-  this.Teams = response.data;
+.then((respon) => {
+  console.log(respon.data);
+  this.Teams = respon.data;
 
 })
         }

@@ -70,20 +70,20 @@
               <v-toolbar
                 color="light-blue darken-4"
                 
-                flat
+                
               >
               <v-spacer></v-spacer>
                 <v-toolbar-title> Player List </v-toolbar-title>
                 <v-spacer />
                   
               </v-toolbar>
-              <v-text-field
+            <v-container><v-text-field
         v-model="search"
         append-icon="mdi-magnify"
         label="Search"
-        single-line
         hide-details
       ></v-text-field>
+  <v-container>
   <v-data-table
     :headers="headers"
     :items="Player"
@@ -100,14 +100,16 @@
             <td>{{row.item.isMarquee}}</td>
             <td>{{row.item.price}}</td>
             <td>
-                <v-btn class="mx-2" light small  @click="bid(row.item._id)">
-                  Bid
+                <v-btn :disabled="row.item.bidDone" class="mx-2" light small  @click="bid(row.item._id)">
+                  BID
                 </v-btn>
             </td>
           </tr>
       </template>
   
   </v-data-table>
+  </v-container>
+  </v-container>
   </v-card>
     </v-col>
     </v-row>
@@ -144,10 +146,14 @@ name:'Player',components: {
             sortable: false,
             value: 'name',
           },
-          { text: 'Player Type', value: 'type' },
-          { text: 'Marquee', value: 'isMarquee' },
-          { text: 'Price', value: 'price' },
-          { text: 'Bid', value:'_id'},
+          { text: 'Player Type',align: 'start',            sortable: false,
+ value: 'type' },
+          { text: 'Marquee',align: 'start',            sortable: false,
+ value: 'isMarquee' },
+          { text: 'Price',            sortable: false,
+ value: 'price' },
+          { text: 'Bid',            sortable: false,
+value:'_id'},
 
           
       ],
