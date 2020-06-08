@@ -7,26 +7,23 @@
      <v-app id="config">
             <v-content>
 <v-card
-        class="mx-auto overflow-hidden"
+  class="mx-auto overflow-hidden"
             >
     <v-app-bar
       color = "red "
-      
-  
-      
-    >
-    
-      
+      >
+
+
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
         <v-spacer/>
       <center><v-toolbar-title><strong> Fantasy Football 2020</strong></v-toolbar-title></center>
       <v-spacer/>
     </v-app-bar>
 
-    
+
             </v-card>
 
-    
+
       <v-navigation-drawer
       v-model="drawer"
       absolute
@@ -41,22 +38,22 @@
         >
           <router-link tag="span" to='/'>
           <v-list-item>
-            
+
             <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
             </v-list-item-icon>
             <v-list-item-title>Home</v-list-item-title>
-            
+
           </v-list-item>
           </router-link>
-          
+
 
         </v-list-item-group>
       </v-list>
       </v-navigation-drawer>
-     <v-container absolute fluid 
+     <v-container absolute fluid
       >
-                            
+
 
         <v-row
           align="center"
@@ -69,15 +66,24 @@
             <v-card class="elevation-12">
               <v-toolbar
                 color="light-blue darken-4"
+<<<<<<< HEAD
                 
                 
+=======
+
+                flat
+>>>>>>> f8d5d744bb37173cd064cf3c42f1c19a23388687
               >
               <v-spacer></v-spacer>
-                <v-toolbar-title> Player List </v-toolbar-title>
+                <v-toolbar-title class="display-1"> Player List </v-toolbar-title>
                 <v-spacer />
-                  
+
               </v-toolbar>
+<<<<<<< HEAD
             <v-container><v-text-field
+=======
+     <v-text-field
+>>>>>>> f8d5d744bb37173cd064cf3c42f1c19a23388687
         v-model="search"
         append-icon="mdi-magnify"
         label="Search"
@@ -88,8 +94,7 @@
     :headers="headers"
     :items="Player"
     :items-per-page="742"
-          :search="search"
-
+    :search="search"
     hide-default-footer
     class="elevation-1"
   >
@@ -106,7 +111,7 @@
             </td>
           </tr>
       </template>
-  
+
   </v-data-table>
   </v-container>
   </v-container>
@@ -114,7 +119,7 @@
     </v-col>
     </v-row>
 
-      </v-container>   
+      </v-container>
 
     </v-content >
                <Footer/>
@@ -122,7 +127,7 @@
      </v-app>
 
  </div>
- 
+
 </template>
 
 <script>
@@ -155,7 +160,7 @@ name:'Player',components: {
           { text: 'Bid',            sortable: false,
 value:'_id'},
 
-          
+
       ],
        Player: [],
        type:["","Goalkeeper","Mid-Fielder","Defender","Forward"],

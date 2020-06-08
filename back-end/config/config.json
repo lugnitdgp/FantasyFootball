@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 { 
     "hasStarted" : false,
     "lastPlayer" : "",
@@ -10,3 +11,6 @@
     "total":15
     
 }
+=======
+{"hasStarted":true,"lastPlayer":"5edd37c64dd9615b2233d17a","bidDone":true,"penalty":100,"ngk":2,"nfw":4,"ndf":5,"nmf":4,"total":15}
+>>>>>>> f8d5d744bb37173cd064cf3c42f1c19a23388687
