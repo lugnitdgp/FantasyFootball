@@ -5,7 +5,7 @@
      <div v-else>
 
   <v-app id="config">
-    
+
     <span class="bg"></span>
     <v-content >
 
@@ -15,22 +15,22 @@
             >
     <v-app-bar
       color = "red "
-      
-  
-      
+
+
+
     >
-    
-      
+
+
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
         <v-spacer/>
       <center><v-toolbar-title><strong> Fantasy Football 2020</strong></v-toolbar-title></center>
       <v-spacer/>
     </v-app-bar>
 
-    
+
             </v-card>
 
-    
+
       <v-navigation-drawer
       v-model="drawer"
       absolute
@@ -45,22 +45,22 @@
         >
           <router-link tag="span" to='/'>
           <v-list-item>
-            
+
             <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
             </v-list-item-icon>
             <v-list-item-title>Home</v-list-item-title>
-            
+
           </v-list-item>
           </router-link>
-          
+
 
         </v-list-item-group>
       </v-list>
       </v-navigation-drawer>
-      <v-container absolute fluid 
+      <v-container absolute fluid
       >
-                            
+
 
         <v-row
           align="center"
@@ -80,7 +80,7 @@
               <v-spacer></v-spacer>
                 <v-toolbar-title> Register Teams </v-toolbar-title>
                 <v-spacer />
-                  
+
               </v-toolbar><v-card-text>
             <v-form>
                 <v-text-field
@@ -108,10 +108,9 @@
           </v-col>
         </v-row>
 
-      </v-container>           
+      </v-container>
     </v-content>
-    
-     <Footer/>
+    <Footer/>
   </v-app>
     </div>
 
@@ -139,7 +138,7 @@ export default {
  created(){
    this.$vuetify.theme.dark=true
    this.sleep(500).then(()=>{
-        
+
           this.loading = false
 
 
