@@ -2,23 +2,56 @@
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
+### Requirements:
+
+* NodeJS
+   - [guide](https://nodejs.org/en/download/)
+ 
+* npm
+   - [guide](https://docs.npmjs.com/cli/install)
+ 
+* Mongodb
+  - The database used in the app is MongoDB, so it must be configured on you local machine. Follow the [guide](https://docs.mongodb.com/manual/administration/install-on-linux/) if you dont have MongoDB installed
+
+
 ### Prerequisites
+
 You'll need to clone this repository to your local directory.
 
 Open Terminal
+`git clone https://github.com/v-rohan/FantasyFootball.git`
+
+Open Terminal
+
 `cd back-end`
+
 `npm install` Installs the project dependencies
 
 
 open a terminal window (a seperate one without closing the prior one) on your OS in this folder.
+
 `cd front-end`
+
 `npm install` 
+
 Installs the project dependencies
 
 
 
 
+
 ### Running the project
+
+Open Terminal 
+
+#Start MongoDB
+
+`sudo service mongod start`
+
+#Check Status
+
+`sudo service mongod status`
+
 
 open back-end folder and run Windows Command Prompt or Powershell or terminal window on your OS in the folder.
 
