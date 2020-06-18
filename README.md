@@ -56,7 +56,8 @@ Open Terminal
 open back-end folder and run Windows Command Prompt or Powershell or terminal window on your OS in the folder.
 
 `node index.js`
-This code will start the nodemon command to start a self-restarting server in case of changes in it's source code.
+
+This code will start the node server.
 
 open the front-end folder and run Windows Command Prompt or Powershell or terminal window (a seperate one without closing the prior one) on your OS in this folder.
 
@@ -65,6 +66,7 @@ open the front-end folder and run Windows Command Prompt or Powershell or termin
 
 This command will start the Vue server with the front-end app working at 
 [http://localhost:8080/](http://localhost:8080/ "Your MEVN calendar app")
+
 It's possible that the app maybe deployed on another port as well
 
 ## Built With
@@ -79,6 +81,8 @@ Database - A Mongo Atlas online database
 
 * **V. Rohan Rao** 
 * **Yash Vardhan Prasad**
+
+for the **GNU/Linux User's Group, NIT DURGAPUR**
 
 
 ## Contributing
