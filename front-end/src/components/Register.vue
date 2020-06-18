@@ -30,6 +30,14 @@
                   <v-list-item-title>Home</v-list-item-title>
                 </v-list-item>
               </router-link>
+              <router-link tag="span" to="/players">
+                <v-list-item>
+                  <v-list-item-icon>
+                    <v-icon>mdi-soccer</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-title>CONTINUE AUCTION</v-list-item-title>
+                </v-list-item>
+              </router-link>
             </v-list-item-group>
           </v-list>
         </v-navigation-drawer>

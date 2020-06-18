@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 mongoose.connect(config.db, { useUnifiedTopology: true, useNewUrlParser: true });
-
+var db = mongoose.connection;
 mongoose.Promise = global.Promise;
 
 app.use((req, res, next) => {
@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 
 	next();
 });
-require('./src/routes/route')(app, dir);
+require('./src/routes/route')(app, dir, db);
 
 app.use(Routes);
 console.log(dir);

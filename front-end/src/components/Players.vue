@@ -29,11 +29,29 @@
                   <v-list-item-title>Home</v-list-item-title>
                 </v-list-item>
               </router-link>
+              <router-link tag="span" to="/register">
+                <v-list-item>
+                  <v-list-item-icon>
+                    <v-icon>mdi-soccer</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-title>REGISTER MORE TEAMS</v-list-item-title>
+                </v-list-item>
+              </router-link>
+              <v-list-item @click="end()">
+                <v-list-item-icon>
+                  <v-icon>mdi-close-circle-outline</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>END GAME</v-list-item-title>
+              </v-list-item>
             </v-list-item-group>
           </v-list>
         </v-navigation-drawer>
-
         <v-container absolute fluid>
+          <v-row align="center" justify="center">
+            <router-link tag="spans" to="/teams">
+              <v-btn color="red darken-4">CURRENT TEAM STATS</v-btn>
+            </router-link>
+          </v-row>
           <v-row align="center" justify="center">
             <v-col cols="12" md="9">
               <v-card class="elevation-12">
@@ -101,6 +119,7 @@ export default {
     return {
       search: "",
       drawer: false,
+      loading: true,
 
       headers: [
         {
@@ -120,11 +139,16 @@ export default {
         { text: "Bid", sortable: false, value: "_id" }
       ],
       Player: [],
-      type: ["", "Goalkeeper", "Mid-Fielder", "Defender", "Forward"],
-      loading: false
+      type: ["", "Goalkeeper", "Mid-Fielder", "Defender", "Forward"]
     };
   },
   methods: {
+    end() {
+      alert("if you clicked this by mistake, close this tab NOW");
+      axios.post("http://localhost:3000/end").then(() => {
+        this.$router.push("/result");
+      });
+    },
     bid(a) {
       var b = { id: a };
       axios.post("http://localhost:3000/beginBid", b);
@@ -153,21 +177,18 @@ export default {
       }
     });
   },
-  mounted() {
-    this.loading = true; //the loading begin
+  created() {
+    this.$vuetify.theme.dark = true;
     axios
       .get("http://localhost:3000/getList")
       .then(response => {
-        console.log(response.data);
         this.Player = response.data;
+        this.loading = false;
       })
       .catch(error => {
         location.reload();
         console.log(error);
-      })
-      .finally(
-        () => ((this.loading = false), (this.$vuetify.theme.dark = true))
-      );
+      });
   }
 };
 </script>

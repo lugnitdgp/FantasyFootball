@@ -35,6 +35,11 @@
         </v-navigation-drawer>
 
         <v-container fluid>
+          <v-row align="center" justify="center">
+            <router-link tag="span" to="/players">
+              <v-btn color="red darken-4">Back to Auction</v-btn>
+            </router-link>
+          </v-row>
           <v-data-iterator :items="Teams" hide-default-footer>
             <template v-slot:default="props">
               <v-row>
@@ -68,11 +73,6 @@
                         <v-list-item-content class="align-end">{{ team.number.mf}}</v-list-item-content>
                       </v-list-item>
                     </v-list>
-
-                    <v-card-actions>
-                      <v-spacer />
-                      <v-btn class="mx-2" light small @click="more()">MORE</v-btn>
-                    </v-card-actions>
                   </v-card>
                 </v-col>
               </v-row>

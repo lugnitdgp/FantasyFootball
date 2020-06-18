@@ -1,1 +1,11 @@
-{"hasStarted":true,"lastPlayer":"5eda6bf9a1b3487361176b38","bidDone":false,"penalty":100,"ngk":2,"nfw":4,"ndf":5,"nmf":4,"total":15}
+{
+	"hasStarted": false,
+	"lastPlayer": "",
+	"bidDone": false,
+	"penalty": 100,
+	"ngk": 2,
+	"nfw": 4,
+	"ndf": 5,
+	"nmf": 4,
+	"total": 15
+}
