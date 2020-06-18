@@ -19,16 +19,18 @@ These instructions will get you a copy of the project up and running on your loc
 You'll need to clone this repository to your local directory.
 
 Open Terminal
+
 `git clone https://github.com/v-rohan/FantasyFootball.git`
 
-Open Terminal
+
+Open Terminal in the FantasyFootball folder (or by `cd FantasyFootball`)
 
 `cd back-end`
 
 `npm install` Installs the project dependencies
 
 
-open a terminal window (a seperate one without closing the prior one) on your OS in this folder.
+open a terminal window (a seperate one without closing the prior one) on your OS in the FantasyFootball folder.
 
 `cd front-end`
 
