@@ -1,22 +1,22 @@
 {
-  "name": "back-end",
-  "version": "1.0.0",
-  "description": "The back-eend Nodejs server for FantasyFootball, GNU/Linux User's Group, NIT Durgapur",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "startup": "nodemon src/index.js"
-  },
-  "author": "V Rohan Rao",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^0.19.2",
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "csv-parse": "^4.9.1",
-    "express": "^4.17.1",
-    "mongoose": "^5.9.14",
-    "nodemon": "^2.0.4",
-    "path": "^0.12.7"
-  }
+	"name": "back-end",
+	"version": "1.0.0",
+	"description": "The back-eend Nodejs server for FantasyFootball, GNU/Linux User's Group, NIT Durgapur",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"startup": "nodemon src/index.js"
+	},
+	"author": "V Rohan Rao and Yash Vardhan Prasad",
+	"license": "ISC",
+	"dependencies": {
+		"axios": "^0.19.2",
+		"body-parser": "^1.19.0",
+		"cors": "^2.8.5",
+		"csv-parse": "^4.9.1",
+		"express": "^4.17.1",
+		"mongoose": "^5.9.14",
+		"nodemon": "^2.0.4",
+		"path": "^0.12.7"
+	}
 }
