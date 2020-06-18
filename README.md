@@ -74,9 +74,12 @@ It's possible that the app maybe deployed on another port as well
 ## Built With
 
 This app has been made using the MEVN stack.
-Back-end - Express on Node
-Front-end - Vue
-Database - A Mongo Atlas online database
+
+*Back-end - Express on Node
+
+*Front-end - Vue
+
+*Database - A local Mongo Server
 
 
 ## Authors
