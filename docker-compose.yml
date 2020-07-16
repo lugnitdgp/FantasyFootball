@@ -1,0 +1,14 @@
+version: "3"
+services:
+    vue:
+        build: ./front-end
+        ports: 
+            - "80:8080"
+    express:
+        build: ./back-end
+        ports:
+            - "3000:3000"
+    mongo:
+        image: mongo
+        ports:
+            - "27017:27017"
